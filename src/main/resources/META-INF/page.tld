@@ -13,6 +13,7 @@
 		<attribute>
 			<name>page</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
 			<type>pagee.model.Page</type>
 		</attribute>
 	</tag>
