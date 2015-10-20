@@ -74,7 +74,7 @@ public class PageUtils {
     public static String render(Page page, ServletRequest request, ServletResponse response)
 	    throws ServletException, IOException {
 	if (!(response instanceof HttpServletResponse)) {
-	    throw new ServletException("Only HttpServletResponses are supported yet");
+	    response = new HttpServletRequestUpcast(response);
 	}
 
 	StringResponseRenderer renderer = new StringResponseRenderer((HttpServletResponse) response);
@@ -97,7 +97,7 @@ public class PageUtils {
     public static void render(Page page, ServletRequest request, ServletResponse response, Writer out)
 	    throws ServletException, IOException {
 	if (!(response instanceof HttpServletResponse)) {
-	    throw new ServletException("Only HttpServletResponses are supported yet");
+	    response = new HttpServletRequestUpcast(response);
 	}
 
 	WriterResponseRenderer renderer = new WriterResponseRenderer((HttpServletResponse) response, out);
