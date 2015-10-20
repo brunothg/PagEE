@@ -7,6 +7,19 @@
 	<short-name>pge</short-name>
 	<uri>jstl://pge</uri>
 	<tag>
+		<description>Write the page directly at this position</description>
+		<name>includePage</name>
+		<tag-class>pagee.tag.PageIncludeTag</tag-class>
+		<body-content>empty</body-content>
+		<attribute>
+			<name>page</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+			<type>pagee.model.Page</type>
+		</attribute>
+	</tag>
+	<tag>
+		<description>Write the page at this position after rendering</description>
 		<name>renderPage</name>
 		<tag-class>pagee.tag.PageRenderTag</tag-class>
 		<body-content>empty</body-content>
