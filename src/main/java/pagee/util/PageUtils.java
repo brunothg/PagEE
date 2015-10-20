@@ -1,6 +1,7 @@
 package pagee.util;
 
 import java.io.IOException;
+import java.io.Writer;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -80,6 +81,27 @@ public class PageUtils {
 	include(page, request, renderer);
 
 	return renderer.getRenderResult();
+    }
+
+    /**
+     * Benutzt einen Writer um direkt zu schreiben
+     * 
+     * @see #render(Page, ServletRequest, ServletResponse)
+     * @param page
+     *            Die zu rendernde {@link Page}
+     * @param request
+     * @param response
+     * @param out
+     *            Der Writer, der zum schreiben genutt werden soll
+     */
+    public static void render(Page page, ServletRequest request, ServletResponse response, Writer out)
+	    throws ServletException, IOException {
+	if (!(response instanceof HttpServletResponse)) {
+	    throw new ServletException("Only HttpServletResponses are supported yet");
+	}
+
+	WriterResponseRenderer renderer = new WriterResponseRenderer((HttpServletResponse) response, out);
+	include(page, request, renderer);
     }
 
 }

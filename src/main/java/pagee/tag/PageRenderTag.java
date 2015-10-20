@@ -9,6 +9,7 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 import pagee.model.Page;
+import pagee.util.PageUtils;
 
 /**
  * Tag zum rendern von {@link Page}s<br>
@@ -36,10 +37,8 @@ public class PageRenderTag extends TagSupport {
 	ServletRequest request = pageContext.getRequest();
 	ServletResponse response = pageContext.getResponse();
 
-	String renderResult;
 	try {
-	    renderResult = page.render(request, response);
-	    pageContext.getOut().write(renderResult);
+	    PageUtils.render(page, request, response, pageContext.getOut());
 	} catch (ServletException | IOException e) {
 	    throw new JspException(e);
 	}
