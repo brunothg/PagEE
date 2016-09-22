@@ -1,4 +1,4 @@
-package de.bno.pagee.tag;
+package com.github.brunothg.pagee.tag;
 
 import java.io.IOException;
 
@@ -7,56 +7,66 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * Tag zum einbinden von css Dateien. Funktioniert auch außerhalb vom Head Tag.
- * <br>
- * Beispiel:<br>
+ * Tag for css file inclusion. Can be used outside the head tag. <br>
+ * Example:<br>
  * <code>
  * 	&lt;pge:css href="/resource/css/main.css" &gt;
  * </code>
  */
-public class PageCssTag extends TagSupport {
+public class PageCssTag extends TagSupport
+{
 	private static final long serialVersionUID = 1L;
 
 	private String href;
 	private Boolean internal;
 	private Boolean scriptFallback;
 
-	public String getHref() {
+	public String getHref()
+	{
 		return href;
 	}
 
-	public void setHref(String href) {
+	public void setHref(String href)
+	{
 		this.href = href.trim();
-		if (this.href.startsWith("/")) {
+		if (this.href.startsWith("/"))
+		{
 			this.href = this.href.substring(1);
 		}
 	}
 
-	public boolean isInternal() {
+	public boolean isInternal()
+	{
 		return (internal != null) ? internal : true;
 	}
 
-	public void setInternal(Boolean internal) {
+	public void setInternal(Boolean internal)
+	{
 		this.internal = internal;
 	}
 
-	public boolean isScriptFallback() {
+	public boolean isScriptFallback()
+	{
 		return (scriptFallback != null) ? scriptFallback : true;
 	}
 
-	public void setScriptFallback(Boolean scriptFallback) {
+	public void setScriptFallback(Boolean scriptFallback)
+	{
 		this.scriptFallback = scriptFallback;
 	}
 
-	private String getContextPath() {
+	private String getContextPath()
+	{
 		String ctxPath = pageContext.getServletContext().getContextPath();
-		if (ctxPath.endsWith("/")) {
+		if (ctxPath.endsWith("/"))
+		{
 			ctxPath = ctxPath.substring(0, ctxPath.length() - 1);
 		}
 		return ctxPath;
 	}
 
-	private String buildCssLoader(String href, boolean includeFallback) {
+	private String buildCssLoader(String href, boolean includeFallback)
+	{
 		String cssLoader = "";
 		cssLoader += "<script type=\"text/javascript\">";
 		cssLoader += " var link = document.createElement('link');";
@@ -66,7 +76,8 @@ public class PageCssTag extends TagSupport {
 		cssLoader += " document.head.appendChild(link);";
 		cssLoader += "</script>";
 
-		if (includeFallback) {
+		if (includeFallback)
+		{
 			cssLoader += "\n";
 			cssLoader += "<noscript>";
 			cssLoader += buildCssLink(href);
@@ -76,24 +87,30 @@ public class PageCssTag extends TagSupport {
 		return cssLoader;
 	}
 
-	private String buildCssLink(String href) {
+	private String buildCssLink(String href)
+	{
 		return "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + href + "\">";
 	}
 
 	@Override
-	public int doStartTag() throws JspException {
+	public int doStartTag() throws JspException
+	{
 
 		ServletResponse response = pageContext.getResponse();
 		String contextPath = getContextPath();
 
 		String effectiveHref = href;
-		if (isInternal()) {
+		if (isInternal())
+		{
 			effectiveHref = contextPath + "/" + href;
 		}
 
-		try {
+		try
+		{
 			response.getWriter().append(buildCssLoader(effectiveHref, isScriptFallback()));
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 

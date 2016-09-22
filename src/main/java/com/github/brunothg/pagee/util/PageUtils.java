@@ -1,4 +1,4 @@
-package de.bno.pagee.util;
+package com.github.brunothg.pagee.util;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -9,17 +9,16 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-import de.bno.pagee.model.Page;
+import com.github.brunothg.pagee.model.Page;
 
-public class PageUtils {
+public class PageUtils
+{
 
 	/**
-	 * Leitet eine Anfrage an eine Seite weiter.<br>
-	 * Es steht ein Attribute ( {@link Page#self} ) zum Zugriff auf die eigene
-	 * {@link Page} zur verfügung.
+	 * Redirect a request to another page.<br>
+	 * An attribute ( {@link Page#self} ) is provided for accessing the own {@link Page}.
 	 * 
-	 * @param page
-	 *            Die {@link Page}, die als Ziel des Forwards dienen soll
+	 * @param page The target {@link Page}
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -27,7 +26,8 @@ public class PageUtils {
 	 * @see RequestDispatcher#forward(ServletRequest, ServletResponse)
 	 */
 	public static void forward(Page page, ServletRequest request, ServletResponse response)
-			throws ServletException, IOException {
+		throws ServletException, IOException
+	{
 		request.setAttribute(Page.self, page);
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page.getPath());
@@ -35,12 +35,10 @@ public class PageUtils {
 	}
 
 	/**
-	 * Inkludiert eine Seite.<br>
-	 * Es steht ein Attribute ( {@link Page#self} ) zum Zugriff auf die eigene
-	 * {@link Page} zur verfügung.
+	 * Include a page.<br>
+	 * An attribute ( {@link Page#self} ) is provided for accessing the own {@link Page}.
 	 * 
-	 * @param page
-	 *            Die {@link Page}, die als Ziel des Includes dienen soll
+	 * @param page The target {@link Page}
 	 * @param request
 	 * @param response
 	 * @throws ServletException
@@ -48,7 +46,8 @@ public class PageUtils {
 	 * @see RequestDispatcher#include(ServletRequest, ServletResponse)
 	 */
 	public static void include(Page page, ServletRequest request, ServletResponse response)
-			throws ServletException, IOException {
+		throws ServletException, IOException
+	{
 		Object parentSelf = request.getAttribute(Page.self);
 
 		request.setAttribute(Page.self, page);
@@ -56,24 +55,25 @@ public class PageUtils {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page.getPath());
 		dispatcher.include(request, response);
 
-		// Stelle das self Attribut für den Parent wieder her
+		// Recreate self attribute for parent
 		request.setAttribute(Page.self, parentSelf);
 	}
 
 	/**
-	 * Gibt das Ergebnis eines Includes als String zurück.
+	 * Get the result of an include
 	 * 
-	 * @param page
-	 *            Die zu rendernde {@link Page}
+	 * @param page The {@link Page} for rendering
 	 * @param request
 	 * @param response
-	 * @return Gerenderte Seite
+	 * @return Rendered page
 	 * @throws IOException
 	 * @throws ServletException
 	 */
 	public static String render(Page page, ServletRequest request, ServletResponse response)
-			throws ServletException, IOException {
-		if (!(response instanceof HttpServletResponse)) {
+		throws ServletException, IOException
+	{
+		if (!(response instanceof HttpServletResponse))
+		{
 			response = new HttpServletRequestUpcast(response);
 		}
 
@@ -84,19 +84,19 @@ public class PageUtils {
 	}
 
 	/**
-	 * Benutzt einen Writer um direkt zu schreiben
+	 * Uses a writer for direct writing
 	 * 
 	 * @see #render(Page, ServletRequest, ServletResponse)
-	 * @param page
-	 *            Die zu rendernde {@link Page}
+	 * @param page The {@link Page} for rendering
 	 * @param request
 	 * @param response
-	 * @param out
-	 *            Der Writer, der zum schreiben genutt werden soll
+	 * @param out The writer used for output
 	 */
 	public static void render(Page page, ServletRequest request, ServletResponse response, Writer out)
-			throws ServletException, IOException {
-		if (!(response instanceof HttpServletResponse)) {
+		throws ServletException, IOException
+	{
+		if (!(response instanceof HttpServletResponse))
+		{
 			response = new HttpServletRequestUpcast(response);
 		}
 

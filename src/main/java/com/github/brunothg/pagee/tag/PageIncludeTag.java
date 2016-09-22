@@ -1,4 +1,4 @@
-package de.bno.pagee.tag;
+package com.github.brunothg.pagee.tag;
 
 import java.io.IOException;
 
@@ -8,38 +8,45 @@ import javax.servlet.ServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
-import de.bno.pagee.model.Page;
-import de.bno.pagee.util.PageUtils;
+import com.github.brunothg.pagee.model.Page;
+import com.github.brunothg.pagee.util.PageUtils;
 
 /**
- * Tag zum direkten rendern von {@link Page}s<br>
- * Beispiel:<br>
+ * Tag for direct rendering of {@link Page}s<br>
+ * Example:<br>
  * <code>
  * 	&lt;pge:includePage page="${self.navigation}" &gt;
  * </code>
  */
-public class PageIncludeTag extends TagSupport {
+public class PageIncludeTag extends TagSupport
+{
 	private static final long serialVersionUID = 1L;
 
 	private Page page;
 
-	public Page getPage() {
+	public Page getPage()
+	{
 		return page;
 	}
 
-	public void setPage(Page page) {
+	public void setPage(Page page)
+	{
 		this.page = page;
 	}
 
 	@Override
-	public int doStartTag() throws JspException {
+	public int doStartTag() throws JspException
+	{
 
 		ServletRequest request = pageContext.getRequest();
 		ServletResponse response = pageContext.getResponse();
 
-		try {
+		try
+		{
 			PageUtils.render(page, request, response, pageContext.getOut());
-		} catch (ServletException | IOException e) {
+		}
+		catch (ServletException | IOException e)
+		{
 			throw new JspException(e);
 		}
 

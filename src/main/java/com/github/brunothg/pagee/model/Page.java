@@ -1,4 +1,4 @@
-package de.bno.pagee.model;
+package com.github.brunothg.pagee.model;
 
 import java.io.IOException;
 
@@ -8,37 +8,41 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import de.bno.pagee.util.PageUtils;
+import com.github.brunothg.pagee.util.PageUtils;
 
 /**
- * Interface für den Zugriff auf Pages
+ * Interface for {@link Page} access
  */
-public interface Page {
+public interface Page
+{
 
+	/**
+	 * Attribute name for the page itself
+	 */
 	public static final String self = "self";
 
 	/**
-	 * Gibt den relativen Pfad zu der JSP, der von einem
-	 * {@link HttpServletRequest#getRequestDispatcher(String)} verarbeitet
-	 * werden kann.
+	 * Get relative path to a jsp page, which can be processed by an
+	 * {@link HttpServletRequest#getRequestDispatcher(String)}.
 	 * 
-	 * @return Relativer Pfad zu der entsprechenden JSP
+	 * @return Relative path to corresponding jsp.
+	 * 
 	 */
 	public String getPath();
 
 	/**
-	 * Gibt den Titel der Seite
+	 * Get the page's title
 	 * 
-	 * @return Den Titel der Seite
+	 * @return The page's title
 	 */
 	public String getTitle();
 
 	/**
-	 * Leitet eine Anfrage an diese Seite weiter. Es wird ein Attribut (
-	 * {@link #self} ) gesetzt, über das die Seite ansprechbar ist.
+	 * Redirect a request to this page. The attribute ( {@link #self} ) is set, so that the page
+	 * itself is accessable.
 	 * 
-	 * @param request
-	 * @param response
+	 * @param request The {@link ServletRequest}
+	 * @param response The {@link ServletResponse}
 	 * @throws ServletException
 	 * @throws IOException
 	 * @see RequestDispatcher#forward(ServletRequest, ServletResponse)
@@ -47,12 +51,12 @@ public interface Page {
 	public void forward(ServletRequest request, ServletResponse response) throws ServletException, IOException;
 
 	/**
-	 * Inkludiert diese Seite. Es wird ein Attribut ( {@link #self} ) gesetzt,
-	 * über das die Seite ansprechbar ist.<br>
-	 * Sollte in JSPs mit bedacht benutzt werden.
+	 * Includes this page. The attribute ( {@link #self} ) is set, so that the page itself is
+	 * accessible. <br>
+	 * Be careful when using this in a jsp.
 	 * 
-	 * @param request
-	 * @param response
+	 * @param request The {@link ServletRequest}
+	 * @param response The {@link ServletResponse}
 	 * @throws ServletException
 	 * @throws IOException
 	 * @see RequestDispatcher#include(ServletRequest, ServletResponse)
@@ -61,9 +65,9 @@ public interface Page {
 	public void include(ServletRequest request, ServletResponse response) throws ServletException, IOException;
 
 	/**
-	 * Gibt das Ergebnis dieser Seite als String zurück. Es wird ein Attribut (
-	 * {@link #self} ) gesetzt, über das die Seite ansprechbar ist.<br>
-	 * In JSPs kann somit ein sicherer Include umgesetzt werden.
+	 * Get the rendering result of this page as a {@link String}. The attribute ( {@link #self} ) is
+	 * set, so that the page itself is accessable. <br>
+	 * For save include in a jsp.
 	 * 
 	 * @param request
 	 * @param response

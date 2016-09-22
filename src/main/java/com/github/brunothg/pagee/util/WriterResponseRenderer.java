@@ -1,4 +1,4 @@
-package de.bno.pagee.util;
+package com.github.brunothg.pagee.util;
 
 import java.io.IOException;
 import java.io.PrintWriter;
