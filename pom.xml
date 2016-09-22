@@ -1,9 +1,30 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>bno</groupId>
+	<groupId>com.github.brunothg</groupId>
 	<artifactId>pagee</artifactId>
-	<version>0.0.4</version>
+	<version>1.0.0</version>
+
+	<developers>
+		<developer>
+			<id>brunothg</id>
+			<name>Marvin Bruns</name>
+			<url>https://github.com/brunothg</url>
+		</developer>
+	</developers>
+
+	<licenses>
+		<license>
+			<name>GNU GENERAL PUBLIC LICENSE Version 2, June 1991</name>
+			<url>http://www.gnu.org/licenses/gpl-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>git@github.com:brunothg/PagEE</url>
+		<connection>scm:git:git@github.com:brunothg/PagEE.git</connection>
+		<developerConnection>scm:git:git@github.com:brunothg/PagEE.git</developerConnection>
+	</scm>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -44,6 +65,26 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<configuration>
+					<charset>${project.build.sourceEncoding}</charset>
+					<docencoding>${project.build.sourceEncoding}</docencoding>
+					<show>private</show>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencies>
 		<!-- JavaEE -->
