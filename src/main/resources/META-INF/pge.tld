@@ -15,7 +15,7 @@
 			<name>page</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>pagee.model.Page</type>
+			<type>com.github.brunothg.pagee.model.Page</type>
 		</attribute>
 	</tag>
 	<tag>
@@ -27,7 +27,7 @@
 			<name>page</name>
 			<required>true</required>
 			<rtexprvalue>true</rtexprvalue>
-			<type>pagee.model.Page</type>
+			<type>com.github.brunothg.pagee.model.Page</type>
 		</attribute>
 	</tag>
 	<tag>
